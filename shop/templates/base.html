@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <title>Django People</title>
+  </head>
+  <body>
+  <header>
+    <div class="container clearfix">   
+
+<div class= "navbar-wrapper">
+    <div class="container">
+        <nav class = "navbar navbar-inverse navbar-fixed-top" id="navbar_whole">
+
+                <div class = "navbar-header">
+                    <button type= "button" class = "navbar-toggle collapsed" data-toggle = "collapse" data-target= "#navbar" aria-expanded="false" aria-controls = "navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <!--Below is the top-left hand side of the screen where you usually see a company/project name and a logo-->
+                    <!--The next line sends the user back to the home page-->
+                    <a class="navbar-brand" href="/"> 
+                        <!--Insert the file name of your brand image below after the 'img'-->
+                         <img class="img-responsive" src="/static/bootstrap/img/INSERT IMAGE OF BRAND HERE"> 
+                    </a>
+                </div>
+                
+                <div id= "navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                      <!--Below is where you put the rest of the links to the pages you've created. Please reference your own models
+                       in Django.-->
+                        <li>
+                            <<a href="/">Lorem</a>>
+                        </li>
+                        <li>
+                            <a href="/">Ipsum</a>
+                        </li>
+                    </ul>
+                </div>
+        </nav>
+    </div>
+</div>
+</div>
+</header>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-8">
+          
+          <hr class="mt-0 mb-4">
+          {% block content %}
+          {% endblock %}
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
