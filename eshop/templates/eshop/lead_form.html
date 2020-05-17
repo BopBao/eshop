@@ -1,46 +1,552 @@
 {% extends 'base.html' %}
 
 {% load crispy_forms_tags %}
+{% load static %}
+
 
 {% block content %}
-<div style="margin-bottom: 30px;">
-{% for item in inventory %}
-<div>
 
-<button 
-class="btn btn-primary"
-style="margin:10px;"
-onclick="createNew(this)" value='{{item}}' style="display: inline-block; margin-left: 15px;">  {{item}} </button> 
-</div>
-{% endfor %}
-</div>
 
-  <hr class="mt-0 mb-4">
-    <div style="height: 400px;">
-    <ul id="myUL">
-        
-    </ul>
+ <!--begin showcase section-->
+    <section class="section-blue" id="showcase" style="margin-top: 50px; margin-bottom: 100px;">
+
+        <!--begin container-->
+        <div class="container-fluid">
+
+            <!--begin row-->
+            <div class="row">
+
+                <!--begin col md 12-->
+                <!--end col md 12-->
+
+                <!--begin col md 12-->
+                <div class="col-md-12 padding-top-20">
+
+                    <!--begin carousel-->
+                    <div id="carouselIndicators" class="carousel slide" data-ride="carousel">
+
+                       
+                        <!--end carousel-indicators-->
+
+                        <!--begin carousel-inner-->
+                        <div class="carousel-inner">
+
+                            <!--begin carousel-item-->
+                            <div class="carousel-item active">
+
+                                <div class="row text-center">
+
+                                    {% for app in apps %}
+                                        <div class="col-sm-3">
+                                            <img src="{{app.image.url}}" alt="showcase" class="gallery-show">
+                                        </div>
+                                    {% endfor %}
+
+                                </div>
+
+                            </div>
+                            <!--end carousel-item-->
+
+                        </div>
+                        <!--end carousel-inner-->
+
+                        <!--begin carousel-control-prev-->
+                      
+                        <!--end carousel-control-next-->
+
+                    </div>
+                    <!--end carousel-->
+
+                </div>
+                <!--end col md 12-->
+
+            </div>
+            <!--end row -->
+
+        </div>
+        <!--end container -->
+
+    </section>
+    <!--end gallery section -->
+
+<div style="width: 100%; margin-left: auto; margin-right: auto; margin-bottom: 100px;">
+<form method="post" id="calculate_form">
+{% csrf_token %}
+
+<div  style="display: flex; flex-direction: row; width: 100%; justify-content: center;">
+    <div style="width: 25%; ">
+    {{ salesform.imports | as_crispy_field }}
     </div>
-    <hr class="mt-0 mb-4">
+     <div style="width: 25%; margin-left: 25px; margin-right: 25px;">
+    {{ salesform.account | as_crispy_field }}
+    </div>
+     <div style="width: 25%;">
+    {{ salesform.payments | as_crispy_field }}
+    </div>
+</div>
+<div  style="display: flex; flex-direction: row; width: 100%; justify-content: center;">
+   <div style="width: 25%; ">
+    {{ salesform.addon | as_crispy_field }}
+    </div>
+    <div style="width: 25%; margin-left: 25px; margin-right: 25px;">
+    {{ salesform.volume | as_crispy_field }}
+    </div>
+   <div style="width: 25%; ">
+    {{ salesform.billing | as_crispy_field }}
+    </div>
+</div>
 
+
+
+
+
+</form>
+<div id="calculate" class="btn btn-success" style="background-color: #37ccd1 !important; margin-top: 25px;">Calculate Total </div>
+
+</div>
+
+<!--begin showcase section-->
+    <section class="section-blue" style="background-color: #e987d7 !important;" id="showcase">
+
+        <!--begin container-->
+        <div class="container-fluid">
+
+            <!--begin row-->
+            <div class="row">
+
+                <!--begin col md 12-->
+                <div class="col-md-12 text-center">
+
+                    <h2 id="recommendations" class="section-title white-text recommendations">Recommendations</h2>
+
+                </div>
+                <!--end col md 12-->
+
+                <!--begin col md 12-->
+                <div class="col-md-12 padding-top-20">
+
+                    <!--begin carousel-->
+                    <div id="carouselIndicators" class="carousel slide" data-ride="carousel">
+
+                        <!--begin carousel-indicators-->
+                 
+
+                        <!--begin carousel-inner-->
+                        <div class="carousel-inner">
+
+                            <!--begin carousel-item-->
+                            <div class="carousel-item active">
+
+                                <div class="row text-center">
+
+                                    {% for recommend in recommendeds %}
+                                        <div class="col-sm-3 recommend">
+                                            <img src="{{recommend.models.image.url}}" alt="showcase" class="gallery-show">
+                                        </div>
+                                    {% endfor %}
+
+                                </div>
+
+                            </div>
+                            <!--end carousel-item-->
+
+                        </div>
+                        <!--end carousel-inner-->
+
+                    </div>
+                    <!--end carousel-->
+
+                </div>
+                <!--end col md 12-->
+
+            </div>
+            <!--end row -->
+
+        </div>
+        <!--end container -->
+
+    </section>
+    <!--end gallery section -->
+
+    <!--begin calculator section-->
+    <section class="section-white" id="showcase">
+
+        <!--begin container-->
+        <div class="container-fluid">
+
+            <!--begin row-->
+            <div class="row">
+
+                <!--begin col md 12-->
+                <div class="col-md-12 text-center">
+
+                <div id="id_total" style="text-align: right; font-size: 40pt; font-weight: bold; margin-right: 150px">
+                Total 0 SEK / month
+                </div>
+                <div style="text-align: right; font-size: 14pt; margin-right: 150px">
+                Setup fee of 1500 is charged per app
+                </div>
+                </div>
+
+                <!--end col md 12-->
+
+            </div>
+            <!--end row -->
+
+        </div>
+        <!--end container -->
+
+    </section>
+
+    <!--begin services section -->
+    <section class="section-white section-bottom-border" id="features">
+
+        <!--begin container -->
+        <div class="container">
+
+            <!--begin row -->
+            <div class="row">
+
+                <!--begin col-md-12-->
+                <div class="col-md-12 text-center padding-bottom-10">
+
+                    <h2 class="section-title" style="text-align: left !important; margin-left: 50px;">Features</h2>
+
+                </div>
+                <!--end col-md-12 -->
+
+            </div>
+            <!--end row -->
+
+            <!--begin row -->
+            <div class="row">
+
+                <!--begin col-md-4-->
+                <div class="col-md-4">
+
+                    <div class="feature-box wow fadeIn" data-wow-delay="0.25s"
+                        style="visibility: visible; animation-delay: 0.25s; animation-name: fadeIn;">
+
+                        <i class="fas fa-tachometer-alt"></i>
+
+                        <h4>Powerful Dashboard</h4>
+
+                        <p>Utise wisi enim minim veniam, quis et stationes ullamcorper suscipit ets lobotis nisle
+                            consequat nihis etim.</p>
+
+                    </div>
+                </div>
+                <!--end col-md-4 -->
+
+                <!--begin col-md-4-->
+                <div class="col-md-4">
+
+                    <div class="feature-box wow fadeIn" data-wow-delay="0.5s"
+                        style="visibility: visible; animation-delay: 0.5s; animation-name: fadeIn;">
+
+                        <i class="fas fa-chart-line"></i>
+
+                        <h4>User Friendly</h4>
+
+                        <p>Utise wisi enim minim veniam, quis et stationes ullamcorper suscipit ets lobotis nisle
+                            consequat nihis etim.</p>
+
+                    </div>
+                </div>
+                <!--end col-md-4 -->
+
+                <!--begin col-md 4-->
+                <div class="col-md-4">
+
+                    <div class="feature-box wow fadeIn" data-wow-delay="0.75s"
+                        style="visibility: visible; animation-delay: 0.75s; animation-name: fadeIn;">
+
+                        <i class="fas fa-bell"></i>
+
+                        <h4>Smart Notifications</h4>
+
+                        <p>Utise wisi enim minim veniam, quis et stationes ullamcorper suscipit ets lobotis nisle
+                            consequat nihis etim.</p>
+
+                    </div>
+                </div>
+                <!--end col-md-4 -->
+
+            </div>
+            <!--end row -->
+
+            <!--begin row -->
+            <div class="row">
+
+                <!--begin col-md-4-->
+                <div class="col-md-4">
+
+                    <div class="feature-box wow fadeIn" data-wow-delay="1s"
+                        style="visibility: visible; animation-delay: 1s; animation-name: fadeIn;">
+
+                        <i class="fas fa-hand-holding-usd"></i>
+
+                        <h4>Cost Control</h4>
+
+                        <p>Utise wisi enim minim veniam, quis et stationes ullamcorper suscipit ets lobotis nisle
+                            consequat nihis etim.</p>
+
+                    </div>
+                </div>
+                <!--end col-md-4 -->
+
+                <!--begin col-md-4-->
+                <div class="col-md-4">
+
+                    <div class="feature-box wow fadeIn" data-wow-delay="1.25s"
+                        style="visibility: visible; animation-delay: 1.25s; animation-name: fadeIn;">
+
+                        <i class="fas fa-rocket"></i>
+
+                        <h4>Unique Features</h4>
+
+                        <p>Utise wisi enim minim veniam, quis et stationes ullamcorper suscipit ets lobotis nisle
+                            consequat nihis etim.</p>
+
+                    </div>
+                </div>
+                <!--end col-md-4 -->
+
+                <!--begin col-md-4-->
+                <div class="col-md-4">
+
+                    <div class="feature-box wow fadeIn" data-wow-delay="1.5s"
+                        style="visibility: visible; animation-delay: 1.5s; animation-name: fadeIn;">
+
+                        <i class="fab fa-rocketchat"></i>
+
+                        <h4>Support 24/7</h4>
+
+                        <p>Utise wisi enim minim veniam, quis et stationes ullamcorper suscipit ets lobotis nisle
+                            consequat nihis etim.</p>
+
+                    </div>
+                </div>
+                <!--end col-md-4 -->
+
+            </div>
+            <!--end row -->
+
+        </div>
+        <!--end container -->
+
+    </section>
+    <!--end services section -->
+
+    <!--begin section-white -->
+    <section class="section-white section-bottom-border">
+
+        <!--begin container-->
+        <div class="container">
+
+            <!--begin row-->
+            <div class="row">
+
+                <!--begin col-md-6-->
+                <div class="col-md-6 padding-top-20">
+
+                    <h3 style="text-align: left !important; margin-left: 50px; color: #e987d7;">About Us</h3>
+
+                    <p style="text-align: left !important; margin-left: 50px;">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </p>
+
+
+                </div>
+                <!--end col-md-6-->
+
+                <!--begin col-md-6-->
+                <div class="col-md-6">
+
+                    <img src="{% static 'img/connections.png' %}" class="hero-image width-100 box-shadow" alt="pic" 
+                    style="border-radius: 50%; width: 300px; height: 300px;">
+
+                </div>
+                <!--end col-sm-6-->
+
+            </div>
+            <!--end row-->
+
+        </div>
+        <!--end container-->
+
+    </section>
+    <!--end section-white-->
+
+
+<div class="col-md-12 text-center">
+
+                    <h2 id="recommendations" class="section-title">Ready to Onboard? </h2>
+
+                </div>
+
+<div style="width: 50%; margin-left: auto; margin-right: auto; padding-bottom: 100px;">
 <form method="post">
 {% csrf_token %}
 
-{{ form | crispy }}
 
-<button type="submit" class="btn btn-success">Submit</button>
+<div style="background-color: #37ccd1; padding: 50px; border-radius: 50px;  ">
+    <div  style="display: flex; flex-direction: row; width: 100%; justify-content: center;">
+        <div style="width: 45%; ">
+        {{ form.company_name | as_crispy_field }}
+        </div>
+        <div style="width: 45%; margin-left: 50px;">
+        {{ form.company_id | as_crispy_field }}
+        </div>
+    </div>
+
+    <div  style="display: flex; flex-direction: row; width: 100%; justify-content: center;">
+        <div style="width: 45%;">
+        {{ form.name | as_crispy_field }}
+        </div>
+        <div style="width: 45%; margin-left: 50px;">
+        {{ form.role | as_crispy_field }}
+        </div>
+    </div>
+    <div  style="display: flex; flex-direction: row; width: 100%; justify-content: center;">
+    <div style="width: 45%; ">
+        {{ form.phone_number | as_crispy_field }}
+        </div>
+        <div style="width: 45%; margin-left: 50px;">
+        {{ form.email | as_crispy_field }}
+        </div>
+    </div>
+    <div  style="display: flex; flex-direction: row; width: 100%; justify-content: center;">
+    <div style="width: 45%; ">
+        {{ form.addons | as_crispy_field }}
+        </div>
+        <div style="width: 45%; margin-left: 50px;">
+        {{ form.monthly_volume | as_crispy_field }}
+        </div>
+    </div>
+    <div  style="display: flex; flex-direction: row; width: 100%; justify-content: center;">
+    <div style="width: 35%; ">
+        {{ form.billing_cycle | as_crispy_field }}
+        </div>
+        <div style="width: 35%; margin-left: 50px;">
+        {{ form.accounting | as_crispy_field }}
+        </div>
+    </div>
+    <div  style="display: flex; flex-direction: row; width: 100%; justify-content: center;">
+    <div style="width: 35%; ">
+        {{ form.app_type | as_crispy_field }}
+        </div>
+        <div style="width: 35%; margin-left: 50px;">
+        {{ form.payment | as_crispy_field }}
+        </div>
+    </div>
+</div>
+
+<button type="submit" value="submit" class="btn btn-success" style="background-color: #e987d7 !important; margin-top: 25px; ">Contact Me!</button>
 </form>
 
-<script>
+<div id="calculator_lookup" style="display: none;">
+    <div id="apps">
+    {% for accounting in accountings %}
+        <div id="id_accounting_{{accounting.id}}">
+            {% for payment in accounting.payments.all %}
+            <div id="fk">{{payment.id}}</div>
+            {% endfor %}
+        </div>
+    {% endfor %}
+    {% for app in apps %}
+        <div id="id_app_{{app.id}}">
+            <div id="id_app_cost_{{app.id}}">
+            {{app.price}}
+            </div>
 
-function createNew(item){
-    console.log(item);
-    var li = document.createElement("li");
-    var t = document.createTextNode(item.value);
-    li.append(t);
-    document.getElementById("myUL").appendChild(li);
-    
-}
+            {% for account in app.accounting.all %}
+            <div id="fk">{{account.id}}</div>
+            {% endfor %}
+        </div>
+    {% endfor %}
+    {% for v in volume %}
+        <div id="id_volume_amount_{{v.id}}">
+        {{v.volume}}
+        </div>
+    {% endfor %}
+    {% for c in cycle %}
+        <div id="id_cycle_weeks_{{c.id}}">
+        {{c.number_of_weeks_in_cycle}}
+        </div>
+    {% endfor %}
+    </div>
+</div>
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        
+        $('#id_imports').change(function(){
+            const optionValue = this.value;
+           $('#id_app_type').val(optionValue);
+
+            $('#id_account').children().hide().prop("selected", false);
+
+            const children = $('#id_app_' + optionValue).children();
+            $(children).each(function(){
+                const id = $(this).text();
+                $('#id_account option[value="' + id + '"]').show();
+            });
+        });
+
+        $('#id_account').change(function(){
+            const optionValue = this.value;
+            $('#id_accounting').val(optionValue);
+
+            $('#id_payments').children().hide().prop("selected", false);
+            
+            const children = $("#id_accounting_" + optionValue).children();
+            console.log(children);
+            $(children).each(function(){
+                const id = $(this).text();
+                $('#id_payments option[value="' + id + '"]').show();
+            });
+        });
+
+        $('#id_payments').change(function(){
+            const optionValue = this.value;
+            $('#id_payment').val(optionValue);
+        });
+
+        $('#id_volume').change(function(){
+            const optionValue = this.value;
+            $('#id_monthly_volume').val(optionValue);
+        });
+
+        $('#id_billing').change(function(){
+            const optionValue = this.value;
+            $('#id_billing_cycle').val(optionValue);
+        });
+
+        $('#id_addon').change(function(){
+            const optionValue = this.value;
+            $('#id_addons').val(optionValue);
+        });
+
+        $('#calculate').click(function(){
+            const volumeValueId = $('#id_volume').children("option:selected").val();
+            const volume = $('#id_volume_amount_' + volumeValueId).text();
+            
+            const billingValueId = $('#id_billing').children("option:selected").val();
+            const billing = $('#id_cycle_weeks_' + billingValueId).text();
+
+            const appSelection = $('#id_imports').children('option:selected');
+            const id = $(appSelection).val();
+            const price = $('#id_app_cost_' + id).text();
+
+            const monthlyCost = price * volume * (4 / billing);
+            const text = "Total " + monthlyCost + " SEK / month";
+            $('#id_total').text(text);
+        });
+
+    });
 </script>
 
 {% endblock %}
