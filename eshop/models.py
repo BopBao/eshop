@@ -12,6 +12,7 @@ class Addon(models.Model):
 class BillingCycle(models.Model):
    name= models.CharField(max_length=255)
    number_of_weeks_in_cycle = models.IntegerField(default=0)
+   discount_percent = models.IntegerField(default=0)
 
    def __str__(self):
        return self.name  
@@ -19,6 +20,7 @@ class BillingCycle(models.Model):
 class MonthlyVolume(models.Model):
     name = models.CharField(max_length = 255)
     volume = models.IntegerField(default=0)
+    discount_percent = models.IntegerField(default=0)
 
     def __str__(self):
         return self.name
@@ -26,6 +28,7 @@ class MonthlyVolume(models.Model):
 class Payment(models.Model):
     name=models.CharField(max_length=255)
     image = models.ImageField(upload_to='payment', null=True)
+    price = models.DecimalField(default=0, decimal_places=2, max_digits=10)
 
     def __str__(self):
         return self.name
@@ -69,3 +72,21 @@ class Lead(models.Model):
     def __str__(self):
         return self.name
     
+class AboutUs(models.Model):
+    description=models.TextField(default="")
+    image = models.ImageField(upload_to='about_us', null=True)
+
+class Features(models.Model):
+    title=models.CharField(max_length=255, default="")
+    description=models.TextField(default="")
+    icon=models.ImageField(upload_to='features', null=True)
+
+    def __str__(self):
+        return self.title
+
+class CalculateSection(models.Model):
+    title = models.CharField(max_length=255, default="")
+    description = models.TextField(default="")
+
+    def __str__(self):
+        return self.title

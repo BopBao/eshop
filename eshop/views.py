@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.views.generic import CreateView
-from .models import Lead, App, Accounting, Payment, Recommended, MonthlyVolume, BillingCycle
+from .models import Lead, App, Accounting, Payment, Recommended, MonthlyVolume, BillingCycle, Features, AboutUs
 from .forms import LeadForm, SalesForm
-from .models import App
+from .models import App, CalculateSection
 import logging
 # Create your views here.
 logger = logging.getLogger(__name__)
@@ -51,4 +51,9 @@ def lead_page(request):
     'accountings': Accounting.objects.all(), 
     'payments': Payment.objects.all(),
     'volume': MonthlyVolume.objects.all(),
-    'cycle': BillingCycle.objects.all() })
+    'cycle': BillingCycle.objects.all(),
+    'about': AboutUs.objects.all(),
+    'features': Features.objects.all(),
+    'calculate': CalculateSection.objects.all()
+
+     })

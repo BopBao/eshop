@@ -25,7 +25,7 @@ SECRET_KEY = 'ed211%euffl^2(xy8s!lee=jewe(^y@vbt$84k1)xkhm5b(i)n'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['shopdemo.poordogsbone.com', 'localhost']
+ALLOWED_HOSTS = ['shopdemo.poordogsbone.com', 'localhost', '127.0.0.1']
 
 
 # Application definition

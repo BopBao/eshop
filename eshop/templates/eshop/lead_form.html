@@ -8,7 +8,7 @@
 
 
  <!--begin showcase section-->
-    <section class="section-blue" id="showcase" style="margin-top: 50px; margin-bottom: 100px;">
+    <section class="section-blue" id="showcase" style="margin-top: 50px; margin-bottom: 50px;  padding-top: 10px; padding-bottom: 10px;">
 
         <!--begin container-->
         <div class="container-fluid">
@@ -69,11 +69,24 @@
     </section>
     <!--end gallery section -->
 
+   
+
 <div style="width: 100%; margin-left: auto; margin-right: auto; margin-bottom: 100px;">
-<form method="post" id="calculate_form">
+<div class="col-md-12 text-center padding-bottom: 50px; padding-top: 0px; margin-top: 0px; margin-bottom: 50px; ">
+{% for c in calculate %}
+<h2 class="section-title">{{c.title}}</h2>
+
+    <p style="width: 70%; text-align: 'center'; margin-right: auto; margin-left: auto;">
+    {{c.description}}
+      </p>
+{% endfor %}
+    
+</div>
+
+<form method="post" id="calculate_form" style="padding-top: 50px; ">
 {% csrf_token %}
 
-<div  style="display: flex; flex-direction: row; width: 100%; justify-content: center;">
+<div  style="display: flex; flex-direction: row; width: 100%; justify-content: center; margin-bottom: 50px;">
     <div style="width: 25%; ">
     {{ salesform.imports | as_crispy_field }}
     </div>
@@ -101,12 +114,42 @@
 
 
 </form>
-<div id="calculate" class="btn btn-success" style="background-color: #37ccd1 !important; margin-top: 25px;">Calculate Total </div>
+<div id="calculate" class="btn btn-success" style="background-color: #37ccd1 !important; margin-top: 25px; border: none !important;">Calculate Total </div>
 
 </div>
 
+<!--begin calculator section-->
+    <section class="section-white" style="padding-top: 0px;" id="showcase">
+
+        <!--begin container-->
+        <div class="container-fluid">
+
+            <!--begin row-->
+            <div class="row">
+
+                <!--begin col md 12-->
+                <div class="col-md-12 text-center">
+
+                <div id="id_total" style="text-align: right; font-size: 40pt; font-weight: bold; margin-right: 100px">
+                Total 0 SEK / month
+                </div>
+                <div style="text-align: right; font-size: 14pt; margin-right: 100px">
+                Setup fee of 1500 is charged per app
+                </div>
+                </div>
+
+                <!--end col md 12-->
+
+            </div>
+            <!--end row -->
+
+        </div>
+        <!--end container -->
+
+    </section>
+
 <!--begin showcase section-->
-    <section class="section-blue" style="background-color: #e987d7 !important;" id="showcase">
+    <section class="section-blue" style="background-color: #e987d7 !important; padding: 0; padding-top: 10px; padding-bottom: 10px;" id="showcase">
 
         <!--begin container-->
         <div class="container-fluid">
@@ -168,36 +211,6 @@
     </section>
     <!--end gallery section -->
 
-    <!--begin calculator section-->
-    <section class="section-white" id="showcase">
-
-        <!--begin container-->
-        <div class="container-fluid">
-
-            <!--begin row-->
-            <div class="row">
-
-                <!--begin col md 12-->
-                <div class="col-md-12 text-center">
-
-                <div id="id_total" style="text-align: right; font-size: 40pt; font-weight: bold; margin-right: 150px">
-                Total 0 SEK / month
-                </div>
-                <div style="text-align: right; font-size: 14pt; margin-right: 150px">
-                Setup fee of 1500 is charged per app
-                </div>
-                </div>
-
-                <!--end col md 12-->
-
-            </div>
-            <!--end row -->
-
-        </div>
-        <!--end container -->
-
-    </section>
-
     <!--begin services section -->
     <section class="section-white section-bottom-border" id="features">
 
@@ -220,114 +233,20 @@
 
             <!--begin row -->
             <div class="row">
-
-                <!--begin col-md-4-->
-                <div class="col-md-4">
-
+                {% for feature in features %}
+                 <div class="col-md-4">
                     <div class="feature-box wow fadeIn" data-wow-delay="0.25s"
                         style="visibility: visible; animation-delay: 0.25s; animation-name: fadeIn;">
 
-                        <i class="fas fa-tachometer-alt"></i>
+                        <img class="fas fa-tachometer-alt" style="border-radius: 50%; margin-bottom: 15px;" src={{feature.icon.url}} height="50" width="50"/>
 
-                        <h4>Powerful Dashboard</h4>
+                        <h4>{{feature.title}}</h4>
 
-                        <p>Utise wisi enim minim veniam, quis et stationes ullamcorper suscipit ets lobotis nisle
-                            consequat nihis etim.</p>
-
-                    </div>
-                </div>
-                <!--end col-md-4 -->
-
-                <!--begin col-md-4-->
-                <div class="col-md-4">
-
-                    <div class="feature-box wow fadeIn" data-wow-delay="0.5s"
-                        style="visibility: visible; animation-delay: 0.5s; animation-name: fadeIn;">
-
-                        <i class="fas fa-chart-line"></i>
-
-                        <h4>User Friendly</h4>
-
-                        <p>Utise wisi enim minim veniam, quis et stationes ullamcorper suscipit ets lobotis nisle
-                            consequat nihis etim.</p>
+                        <p>{{feature.description}}</p>
 
                     </div>
-                </div>
-                <!--end col-md-4 -->
-
-                <!--begin col-md 4-->
-                <div class="col-md-4">
-
-                    <div class="feature-box wow fadeIn" data-wow-delay="0.75s"
-                        style="visibility: visible; animation-delay: 0.75s; animation-name: fadeIn;">
-
-                        <i class="fas fa-bell"></i>
-
-                        <h4>Smart Notifications</h4>
-
-                        <p>Utise wisi enim minim veniam, quis et stationes ullamcorper suscipit ets lobotis nisle
-                            consequat nihis etim.</p>
-
                     </div>
-                </div>
-                <!--end col-md-4 -->
-
-            </div>
-            <!--end row -->
-
-            <!--begin row -->
-            <div class="row">
-
-                <!--begin col-md-4-->
-                <div class="col-md-4">
-
-                    <div class="feature-box wow fadeIn" data-wow-delay="1s"
-                        style="visibility: visible; animation-delay: 1s; animation-name: fadeIn;">
-
-                        <i class="fas fa-hand-holding-usd"></i>
-
-                        <h4>Cost Control</h4>
-
-                        <p>Utise wisi enim minim veniam, quis et stationes ullamcorper suscipit ets lobotis nisle
-                            consequat nihis etim.</p>
-
-                    </div>
-                </div>
-                <!--end col-md-4 -->
-
-                <!--begin col-md-4-->
-                <div class="col-md-4">
-
-                    <div class="feature-box wow fadeIn" data-wow-delay="1.25s"
-                        style="visibility: visible; animation-delay: 1.25s; animation-name: fadeIn;">
-
-                        <i class="fas fa-rocket"></i>
-
-                        <h4>Unique Features</h4>
-
-                        <p>Utise wisi enim minim veniam, quis et stationes ullamcorper suscipit ets lobotis nisle
-                            consequat nihis etim.</p>
-
-                    </div>
-                </div>
-                <!--end col-md-4 -->
-
-                <!--begin col-md-4-->
-                <div class="col-md-4">
-
-                    <div class="feature-box wow fadeIn" data-wow-delay="1.5s"
-                        style="visibility: visible; animation-delay: 1.5s; animation-name: fadeIn;">
-
-                        <i class="fab fa-rocketchat"></i>
-
-                        <h4>Support 24/7</h4>
-
-                        <p>Utise wisi enim minim veniam, quis et stationes ullamcorper suscipit ets lobotis nisle
-                            consequat nihis etim.</p>
-
-                    </div>
-                </div>
-                <!--end col-md-4 -->
+                {% endfor %}
 
             </div>
             <!--end row -->
@@ -346,14 +265,14 @@
 
             <!--begin row-->
             <div class="row">
-
+                 {% for a in about %}
                 <!--begin col-md-6-->
                 <div class="col-md-6 padding-top-20">
 
                     <h3 style="text-align: left !important; margin-left: 50px; color: #e987d7;">About Us</h3>
-
+                   
                     <p style="text-align: left !important; margin-left: 50px;">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        {{a.description}}
                     </p>
 
 
@@ -363,12 +282,12 @@
                 <!--begin col-md-6-->
                 <div class="col-md-6">
 
-                    <img src="{% static 'img/connections.png' %}" class="hero-image width-100 box-shadow" alt="pic" 
+                    <img src="{{a.image.url}}" class="hero-image width-100 box-shadow" alt="pic" 
                     style="border-radius: 50%; width: 300px; height: 300px;">
 
                 </div>
                 <!--end col-sm-6-->
-
+                {% endfor %}
             </div>
             <!--end row-->
 
@@ -442,7 +361,7 @@
     </div>
 </div>
 
-<button type="submit" value="submit" class="btn btn-success" style="background-color: #e987d7 !important; margin-top: 25px; ">Contact Me!</button>
+<button type="submit" value="submit" class="btn btn-success" style="background-color: #e987d7 !important; margin-top: 25px; border: none !important; ">Contact Me!</button>
 </form>
 
 <div id="calculator_lookup" style="display: none;">
@@ -473,6 +392,9 @@
     {% for c in cycle %}
         <div id="id_cycle_weeks_{{c.id}}">
         {{c.number_of_weeks_in_cycle}}
+        </div>
+        <div id="id_percent_{{c.id}}">
+        {{c.discount_percent}}
         </div>
     {% endfor %}
     </div>
@@ -536,13 +458,15 @@
             
             const billingValueId = $('#id_billing').children("option:selected").val();
             const billing = $('#id_cycle_weeks_' + billingValueId).text();
+            const discount = $('#id_percent_' + billingValueId).text();
 
             const appSelection = $('#id_imports').children('option:selected');
             const id = $(appSelection).val();
             const price = $('#id_app_cost_' + id).text();
 
-            const monthlyCost = price * volume * (4 / billing);
-            const text = "Total " + monthlyCost + " SEK / month";
+            const discount_percent = (100-discount) / 100;
+            const monthly_price = price * volume * discount_percent;
+            const text = "Total " + monthly_price + " SEK / month";
             $('#id_total').text(text);
         });
 
