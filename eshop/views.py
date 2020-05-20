@@ -1,8 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
 from django.views.generic import CreateView
 from .models import Lead, App, Accounting, Payment, Recommended, MonthlyVolume, BillingCycle, Features, AboutUs
 from .forms import LeadForm, SalesForm
 from .models import App, CalculateSection
+from django.contrib import messages 
 import logging
 # Create your views here.
 logger = logging.getLogger(__name__)
@@ -10,6 +12,8 @@ logger = logging.getLogger(__name__)
 def lead_page(request):
     form = LeadForm()
     salesform = SalesForm()
+    message = 'Thanks for placing your order we will contact you soon'
+    has_message = False
 
     if request.method == 'POST':
         submit_form = LeadForm(data=request.POST)
@@ -42,6 +46,7 @@ def lead_page(request):
             lead.payment = payment
 
             lead.save()
+            has_message = True
    
     return render(request, 'eshop/lead_form.html', 
     {'form': form, 
@@ -54,6 +59,8 @@ def lead_page(request):
     'cycle': BillingCycle.objects.all(),
     'about': AboutUs.objects.all(),
     'features': Features.objects.all(),
-    'calculate': CalculateSection.objects.all()
+    'calculate': CalculateSection.objects.all(),
+    'message': message,
+    'has_message': has_message
 
      })
